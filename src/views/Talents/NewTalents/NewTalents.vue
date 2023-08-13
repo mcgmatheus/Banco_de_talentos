@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/require-v-for-key -->
 <template>
+  <NavigationBar></NavigationBar>
   <form @submit.prevent="handleSubmit">
     <h1>Cadastro de Talentos</h1>
 
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+import NavigationBar from '../../../components/NavigationBar.vue'
 import * as yup from 'yup'
 export default {
   data() {
@@ -61,6 +63,9 @@ export default {
       skills: [],
       apresentation: ''
     }
+  },
+  components: {
+    NavigationBar
   },
   watch: {
     area(areaNewValue, areaOldValue) {
