@@ -9,10 +9,12 @@
           <div class="formItem">
             <label for="name">Nome Completo</label>
             <input id="name" type="text" v-model="name" />
+            {{ this.errors.name }}
           </div>
           <div class="formItem">
             <label for="email">Email</label>
             <input id="email" type="email" v-model="email" />
+            {{ this.errors.email }}
           </div>
         </div>
         <div class="formGroup">
@@ -32,6 +34,7 @@
               // eslint-disable-next-line vue/require-v-for-key
               <option v-for="stack in stacks">{{ stack }}</option>
             </select>
+            {{ this.errors.area }}
           </div>
 
           <div class="formItem">
@@ -76,6 +79,8 @@
 <script>
 import NavigationBar from '../../../components/NavigationBar.vue'
 import * as yup from 'yup'
+import { captureYupError } from '../../../utils/captureYupError'
+
 export default {
   data() {
     return {
@@ -84,11 +89,12 @@ export default {
       birth_date: '',
       phone: '',
       area: '',
-      stacks: ['Selecione', 'FrontEnd', 'BackEnd', 'FullStack'],
+      stacks: ['FrontEnd', 'BackEnd', 'FullStack'],
       profissionalLevel: '',
-      nivels: ['Selecione', 'Júnior', 'Pleno', 'Senior'],
+      nivels: ['Júnior', 'Pleno', 'Senior'],
       skills: [],
-      apresentation: ''
+      apresentation: '',
+      errors: {}
     }
   },
   components: {
@@ -105,17 +111,25 @@ export default {
     handleSubmit() {
       try {
         const schema = yup.object().shape({
-          name: yup.string().require('O nome é orbigatório'),
+          name: yup.string().required('O nome é obrigatório'),
           email: yup.string().email('Email inválido').required('Email é obrigatório'),
           area: yup.string().required('A area é obrigatória')
         })
-        schema.validateSync({
-          name: this.name,
-          email: this.email,
-          area: this.area
-        })
+        schema.validateSync(
+          {
+            name: this.name,
+            email: this.email,
+            area: this.area
+          },
+          { abortEarly: false }
+        )
+        console.log('deu certo')
       } catch (error) {
-        alert('Erro no formulário')
+        if (error instanceof yup.ValidationError) {
+          this.errors = captureYupError(error)
+        }
+        console.log(captureYupError(error))
+        console.log('deu errado')
       }
     }
   }
