@@ -8,22 +8,21 @@
         <div class="formGroup">
           <div class="formItem">
             <label for="name">Nome Completo</label>
-            <input id="name" v-model="name" />
+            <input id="name" type="text" v-model="name" />
           </div>
           <div class="formItem">
             <label for="email">Email</label>
-            <input id="email" v-model="email" />
+            <input id="email" type="email" v-model="email" />
           </div>
         </div>
-
         <div class="formGroup">
           <div class="formItem">
             <label for="birth_date">Data de nascimento</label>
-            <input id="birth_date" v-model="birth_date" />
+            <input id="birth_date" type="date" v-model="birth_date" />
           </div>
           <div class="formItem">
             <label for="phone">WhatsApp</label>
-            <input id="phone" v-model="phone" />
+            <input id="phone" type="text" v-model="phone" />
           </div>
         </div>
         <div class="formGroup">
@@ -42,26 +41,33 @@
             </select>
           </div>
         </div>
-        <p>Selecione suas habilidades</p>
+
         <div class="formPick">
-          <div class="pickHabilities" v-if="area === 'FrontEnd' || area === 'FullStack'">
-            <label><input type="checkbox" value="HTML" v-model="skills" />HTML</label>
-            <label><input type="checkbox" value="CSS" v-model="skills" />CSS</label>
-            <label><input type="checkbox" value="JavaScript" v-model="skills" />JavaScript</label>
-            <label><input type="checkbox" value="Vue" v-model="skills" />Vue</label>
+          <div v-if="area === 'FrontEnd' || area === 'FullStack'">
+            <div class="pickGroup">
+              <p>Selecione suas habilidades FrontEnd:</p>
+              <label><input type="checkbox" value="HTML" v-model="skills" />HTML</label>
+              <label><input type="checkbox" value="CSS" v-model="skills" />CSS</label>
+              <label><input type="checkbox" value="JavaScript" v-model="skills" />JavaScript</label>
+              <label><input type="checkbox" value="Vue" v-model="skills" />Vue</label>
+            </div>
           </div>
-          <div class="pickHabilities" v-if="area === 'BackEnd' || area === 'FullStack'">
-            <label><input type="checkbox" value="Node" v-model="skills" />Node</label>
-            <label><input type="checkbox" value="PHP" v-model="skills" />PHP</label>
-            <label><input type="checkbox" value="Laravel" v-model="skills" />Laravel</label>
-            <label><input type="checkbox" value="Java" v-model="skills" />Java</label>
+          <div v-if="area === 'BackEnd' || area === 'FullStack'">
+            <div class="pickGroup">
+              <p>Selecione suas habilidades BackEnd:</p>
+              <label><input type="checkbox" value="Node" v-model="skills" />Node</label>
+              <label><input type="checkbox" value="PHP" v-model="skills" />PHP</label>
+              <label><input type="checkbox" value="Laravel" v-model="skills" />Laravel</label>
+              <label><input type="checkbox" value="Java" v-model="skills" />Java</label>
+            </div>
           </div>
         </div>
         <div class="formItem">
           <label for="apresentation">Carta de apresentação</label>
-          <textarea id="apresentation" cols="30" rows="10"></textarea>
+          <textarea id="apresentation" cols="70" rows="3"></textarea>
         </div>
       </div>
+      <br />
       <button type="submit">Cadastrar</button>
     </form>
   </div>
@@ -126,7 +132,7 @@ export default {
 .newTalentForm {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 65%;
   align-items: center;
 }
 .formContainer {
@@ -135,9 +141,12 @@ export default {
   width: 80%;
   align-items: center;
 }
+
 .formGroup {
   display: flex;
-  gap: 50px;
+  width: 100%;
+  justify-content: space-evenly;
+  /* gap: 50px; */
   padding: 5px;
 }
 input,
@@ -153,13 +162,19 @@ select {
 .formPick {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-.pickHabilities {
+.pickGroup input {
+  width: 50px;
+}
+button {
   display: flex;
-  flex-direction: column;
-}
-form p {
-  align-self: start;
-  margin-left: 45px;
+  padding: 5px 15px;
+  background: hsl(224, 32%, 74%);
+  color: navy;
+  border: 1px solid hsl(261, 47%, 58%);
+  border-radius: 10px;
 }
 </style>
