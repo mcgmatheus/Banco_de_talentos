@@ -1,45 +1,43 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <nav>
-    <ul class="menu">
-      <router-link to="/">
-        <li>
-          <h2>Home</h2>
-          <img
-            width="50"
-            height="50"
-            src="https://img.icons8.com/ios-filled/50/home.png"
-            alt="home"
-          />
-        </li>
-      </router-link>
-      <router-link to="/talentos/novo">
-        <li>
-          <h2>Cadastro</h2>
-          <img
-            width="50"
-            height="50"
-            src="https://img.icons8.com/ios-filled/50/signing-a-document.png"
-            alt="register_logo"
-          />
-        </li>
-      </router-link>
-      <router-link to="/sobre">
-        <li>
-          <h2>Sobre</h2>
-          <img
-            width="50"
-            height="50"
-            src="https://img.icons8.com/ios-filled/50/info-squared.png"
-            alt="info-squared"
-          />
-        </li>
-      </router-link>
-    </ul>
-  </nav>
-  <h1>Banco de Talentos</h1>
+  <div class="pageContainer">
+    <NavigationBar></NavigationBar>
+    <div class="pageContent">
+      <h1>Banco de Talentos</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur, blanditiis sed
+        exercitationem ex fugit magnam quia placeat quis, delectus facere recusandae tenetur. Ullam
+        deleniti dolorum accusantium dicta explicabo, ea totam!
+      </p>
+    </div>
+  </div>
 </template>
 
-<script></script>
+<script>
+import NavigationBar from '../../components/NavigationBar.vue'
 
-<style scoped></style>
+export default {
+  components: {
+    NavigationBar
+  }
+}
+</script>
+
+<style scoped>
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.pageContainer > div {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+</style>
