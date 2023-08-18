@@ -67,7 +67,7 @@
         </div>
         <div class="formItem">
           <label for="apresentation">Carta de apresentação</label>
-          <textarea id="apresentation" cols="70" rows="3"></textarea>
+          <textarea id="apresentation" cols="70" rows="3" v-model="apresentation"></textarea>
         </div>
       </div>
       <br />
@@ -80,6 +80,7 @@
 import NavigationBar from '../../../components/NavigationBar.vue'
 import * as yup from 'yup'
 import { captureYupError } from '../../../utils/captureYupError'
+import axios from 'axios'
 
 export default {
   data() {
@@ -93,7 +94,7 @@ export default {
       profissionalLevel: '',
       nivels: ['Júnior', 'Pleno', 'Senior'],
       skills: [],
-      apresentation: '',
+      apresentation: [],
       errors: {}
     }
   },
@@ -123,6 +124,28 @@ export default {
           },
           { abortEarly: false }
         )
+
+        axios({
+          url: 'http://localhost:3333/talent',
+          method: 'POST',
+          data: {
+            name: this.name,
+            email: this.email,
+            birth_date: this.birth_date,
+            phone: this.phone,
+            area: this.area,
+            profissionalLevel: this.profissionalLevel,
+            skills: this.skills,
+            bio: this.apresentation
+          }
+        })
+          .then(() => {
+            alert('Cadastrado com sucesso!')
+          })
+          .catch(() => {
+            alert('Houve um erro ao cadastrar, tente novamente.')
+          })
+
         console.log('deu certo')
       } catch (error) {
         if (error instanceof yup.ValidationError) {

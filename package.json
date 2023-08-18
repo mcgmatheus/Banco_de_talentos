@@ -7,9 +7,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "server": "json-server database.json -p 3333 --watch"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "vue-router": "^4.2.4",
     "yup": "^1.2.0"
   },
@@ -19,7 +21,13 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "eslint": "^8.45.0",
     "eslint-plugin-vue": "^9.15.1",
+    "json-server": "^0.17.3",
     "prettier": "^3.0.0",
     "vite": "^4.4.6"
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
